@@ -48,11 +48,11 @@ function detailChara(stringURL){
         addStats =""
         $.each(result.stats,function(key, val){
             addStats += `
-            ${val.stat.name}
             <div class="progress mt-2">
                 <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
                     style="width: ${val.base_stat}%" aria-valuenow="" aria-valuemin="0" aria-valuemax="60">
-                ${val.base_stat}
+                ${val.base_stat} 
+                ${val.stat.name}
                 </div>
             </div>`
         })
@@ -62,7 +62,7 @@ function detailChara(stringURL){
         $.each(result.abilities, function (key, val) {
             abil += 
             `<li class="nav-item">
-                <button class="btn btn-primary mx-4 mt-5"  data-bs-toggle="modal" data-bs-target="#ModalBaru" onclick="detailAbility(${val.ability.url})">
+                <button class="btn btn-primary mx-4 mt-2"  data-bs-toggle="modal" data-bs-target="#ModalBaru" onclick="detailAbility(${val.ability.url}, ${val.ability.name})">
                 ${val.ability.name}
                 </button>
             </li>`;
@@ -76,22 +76,21 @@ function detailChara(stringURL){
     })
 }
 
-function detailAbility(stringURL){
-    $.ajax({
-        url: stringURL
-    }).done((result)=>{
-        effecte =""
-        $.each(result.effect_entries, function (key, val) {
-            effecte += `
-                <h2>Bahasa : ${key.language.name}</h2>
-                <p>${val.effect}</p>
-            `;
-        })
-        $("#isiAbility").html(effecte);
+// function detailAbility(stringURL, name){
+//     $.ajax({
+//         url: stringURL,
+//         type: "GET"
+//     }).done((result)=>{
+//         index = 1;
+//         result.effect_entries[index].language.name != "en" ? index = 0
+//         addEffect=""
 
+//         })
+//         $(`.ability-${name}`).html()
+//         $("#isiAbility").html(effecte);
         
 
-    }).fail((error)=>{
-        console.log(error);
-    })
-}
+//     }).fail((error)=>{
+//         console.log(error);
+//     })
+// }
